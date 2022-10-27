@@ -16,7 +16,4 @@ public class Item
 
     [Column("unit_price")]
     public double UnitPrice { get; set; }
-
-
-    public ICollection<OrderItem>? OrderItems {get;set;}
 }

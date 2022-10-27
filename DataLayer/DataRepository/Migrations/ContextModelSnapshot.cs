@@ -113,9 +113,10 @@ namespace DataRepository.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("amount");
 
-                    b.Property<long>("ItemId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("item_id");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
 
                     b.Property<long>("OrderId")
                         .HasColumnType("bigint")
@@ -126,8 +127,6 @@ namespace DataRepository.Migrations
                         .HasColumnName("unit_price");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
 
                     b.HasIndex("OrderId");
 
@@ -147,19 +146,11 @@ namespace DataRepository.Migrations
 
             modelBuilder.Entity("StoreApi.DataLayer.DataRepository.Models.OrderItem", b =>
                 {
-                    b.HasOne("StoreApi.DataLayer.DataRepository.Models.Item", "Item")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("StoreApi.DataLayer.DataRepository.Models.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Item");
 
                     b.Navigation("Order");
                 });
@@ -167,11 +158,6 @@ namespace DataRepository.Migrations
             modelBuilder.Entity("StoreApi.DataLayer.DataRepository.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("StoreApi.DataLayer.DataRepository.Models.Item", b =>
-                {
-                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("StoreApi.DataLayer.DataRepository.Models.Order", b =>
