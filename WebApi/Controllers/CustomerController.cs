@@ -37,7 +37,7 @@ public class CustomerController : Controller
         {
             var customer = _storeApiContext.GetCustomerById(customerId);
             if (customer == null) return NotFound($"Customer {customerId} not found in our database, sorry.");
-
+            var mapperd = _autoMapper.Map<CustomerDTO>(customer);
             return Ok(customer);
         }
         catch (System.Exception ex)
@@ -53,7 +53,8 @@ public class CustomerController : Controller
         try
         {
             var customers = _storeApiContext.ListCustomers();
-            return Ok(customers);
+            var mapped = customers.Select(c=>_autoMapper.Map<CustomerDTO>(c));
+            return Ok(mapped);
         }
         catch (System.Exception ex)
         {
