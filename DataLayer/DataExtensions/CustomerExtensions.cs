@@ -90,6 +90,10 @@ public static class CustomerExtensions
             var customerCache = context.GetCustomerById(customer.Id);
             if(customerCache == null)
                 throw new ObjectNotFoundException("Customer not found!");
+            
+            var customerWithSameEmail = context.GetCustomerByEmail(customer.Email);
+            if(customerWithSameEmail != null && customerWithSameEmail.Id != idCache)
+                throw new DuplicateWaitObjectException("Email already in use");
 
             customerCache = customer;
             customerCache.Id = idCache;
