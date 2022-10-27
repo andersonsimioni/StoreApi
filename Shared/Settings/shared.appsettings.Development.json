@@ -1,0 +1,5 @@
+{
+    "ConnectionStrings": {
+        "StoreApi": "Server=DESKTOP-8NIVAME\\SQLEXPRESS;User Id=sa;Password=123;"
+    }
+}
