@@ -12,7 +12,7 @@ public interface IExceptionSecurityChecker{
     /// Check if exception is secure
     /// </summary>
     /// <param name="_exception">exception to be checked</param>
-    /// <returns></returns>
+    /// <returns>If the exception no has sensitive information, return true</returns>
     public bool IsSecure(Exception _exception);
 
     /// <summary>
